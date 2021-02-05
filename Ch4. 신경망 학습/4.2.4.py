@@ -1,7 +1,17 @@
 import numpy as np
 
-y1 = [0.1, 0.05, 0.6, 0.0, 0.05, 0.1, 0.0, 0.1, 0.0, 0.0]     #'2'일 확률이 가장 높다고 추정함
-y2 = [0.1, 0.05, 0.1, 0.0, 0.05, 0.1, 0.0, 0.6, 0.0, 0.0]     #'7'일 확률이 가장 높다고 추정함
-t = [0, 0, 1, 0, 0, 0, 0, 0, 0, 0]      #정답은 '2'
-
-def cross_entropy
+#정답 레이블이 one-hot-incoding 일때 (one_hot_label = True)
+def cross_entropy_error(y, t):
+    if y.ndim == 1:
+        t = t.reshape(1, t.size)
+        y = y.reshape(1, y.size)
+    batch_size = y.shape[0] #???
+    return -np.sum(t * np.log(y + 1e-7)) / batch_size
+ 
+#정답 레이블이 one-hot-incoding 이 아닐때 (one_hot_label = False)
+def cross_entropy_error(y, t):
+    if y.ndim == 1:
+        t = t.reshape(1, t.size)
+        y = y.reshape(1, y.size)
+    batch size = y.shape[0]
+    return -np.sum(np.log(y[np.arange(batch_size), t] + 1e-7)) / batch_Size
