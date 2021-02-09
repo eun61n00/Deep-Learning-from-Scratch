@@ -17,8 +17,10 @@ class TwoLayerNet:
         self.params['b2'] = np.zeros(output_size)
         
     def predict(self, x):
-        W1. W2 = self.params['W1'], self.params['W2']
-        b1. b2 = self.params['b1'], self.params['b2']
+        W1 = self.params['W1']
+        W2 = self.params['W2']
+        b1 = self.params['b1']
+        b2 = self.params['b2']
         a1 = np.dot(x, W1) + b1
         z1 = sigmoid(a1)
         a2 = np.dot(z1, W2) + b2
@@ -51,3 +53,18 @@ class TwoLayerNet:
         grads['b2'] = numerical_gradient(loss_W, self.params['b2'])
     
         return grads
+    
+net = TwoLayerNet(input_size = 784, hidden_size = 100, output_size = 10)
+print(net.params['W1'].shape) #(784, 100)
+print(net.params['b1'].shape) #(100,)
+print(net.params['W2'].shape) #(100, 10)
+print(net.params['b2'].shape) #(10, )
+
+x = np.random.rand(100, 784) #더미입력데이터(100장 분량)
+y = net.predict(x)
+
+t = np.random.rand(100, 10)
+
+grad = net.numerical_gradient(x, t)
+
+grads['W1'].shape #(784, 100)
