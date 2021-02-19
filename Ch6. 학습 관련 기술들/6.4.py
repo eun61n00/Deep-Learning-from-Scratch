@@ -11,7 +11,7 @@ max_epocks = 201
 train_size = x_train.shape[0]
 batch_size = 100
 
-train_loss_list[]
+train_loss_list = []
 train_acc_list = []
 test_acc_list = []
 
